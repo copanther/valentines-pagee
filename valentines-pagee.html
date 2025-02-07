@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Arial", sans-serif;
+            background-color: #ffe6e6;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff4d6d;
+        }
+        h2 {
+            color: #ff1e56;
+            margin-bottom: 20px;
+        }
+        .gif {
+            width: 300px;
+            margin: 20px 0;
+        }
+        #yes {
+            background-color: #ff4d6d;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #no {
+            background-color: #ccc;
+            color: black;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body id="mainPage">
+
+    <h1>Hey Bujjuuu 💕</h1>
+    <p style="font-size: 20px;">I have a special question for you...</p>
+
+    <img id="main-gif" class="gif" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGVqZXN1MWE5Y3IyNzJtMnc4dGxmOGRzNDBpN2ozcWhuOHVxc2toayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h4BprYiFYNxRe/giphy.gif" alt="Cute hearts GIF">
+
+    <h2 id="question">Will you be my Valentine? 💖</h2>
+
+    <button id="yes" onclick="yesClicked()">Yes! 💘</button>
+    <button id="no" onclick="noClicked()">No 😢</button>
+
+    <script>
+        let yesSize = 18;
+        let noIndex = 0;
+        let noClickedAtLeastOnce = false;
+
+        let responses = [
+            { text: "Wait really? 😭", gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzVocjhlZmpva3kwazd4bTIxMzFqenF2cG96ZWNuZmdkbzRpa29oZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aWPGuTlDqq2yc/giphy.gif" }, 
+            { text: "Pleaseeeee 🥺", gif: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWhlM2I2bHF6NnlxemJyYjg0M3dlZ2w1bXpmeWJlbXMza2dhczU0OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/29bKyyjDKX1W8/giphy.gif" }, 
+            { text: "I'd be soooo happyyyy! 💕", gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExam9mMnFydjh6bzdkOWRycThkdzd1c3k5bjF6aHRxMnBydDQ0OWp3dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h36vh423PiV9K/giphy.gif" }, 
+            { text: "But I loveeee youuuuu! 😘", gif: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHR1ZnF3eTA5OTA5dm9wa2dmaXdzaXpmaWpjNHhyaGM3cDh4enphbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9QrNWBKvBpCw0/giphy.gif" }, 
+            { text: "Ur my husbanddd 😭", gif: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRnZTE4M2owMWw5NGZ1NHV5MXlld3JmcXRrZ3V1c3c4NHNkdm85dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YqnLDKwLdEMSYT5n7l/giphy.gif" }, 
+            { text: "Pleaseee kadha bavaaa? 😭💖", gif: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGpiNmNqdm1yZG95bmU4Z3QzdmMybmJrM3RpN3lxdjgwajNtaGhtdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZyNQFqZLFUhr2/giphy.gif" }
+        ];
+
+        function noClicked() {
+            let yesButton = document.getElementById("yes");
+            let noButton = document.getElementById("no");
+            let gifImage = document.getElementById("main-gif");
+            let questionText = document.getElementById("question");
+
+            yesSize += 10;
+            yesButton.style.fontSize = yesSize + "px";
+            yesButton.style.padding = (yesSize / 2) + "px " + yesSize + "px";
+
+            if (noIndex < responses.length) {
+                noButton.innerText = responses[noIndex].text;
+                questionText.innerText = responses[noIndex].text;
+                gifImage.src = responses[noIndex].gif;
+                noIndex++;
+            } else {
+                noButton.style.display = "none";
+            }
+
+            noClickedAtLeastOnce = true;
+        }
+
+        function yesClicked() {
+            if (!noClickedAtLeastOnce) {
+                document.body.innerHTML = `
+                    <h1>Oops! 😆</h1>
+                    <p>You have to click "No" at least once before saying "Yes"! 😜</p>
+                    <button onclick="goHome()">Retry 🔄</button>
+                `;
+            } else {
+                document.body.innerHTML = `
+                    <h1>YAY! I KNEW IT! ❤️🥰</h1>
+                    <img class="gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgzZDVuNms2dWk0bGI2aDRsN2w3ajhuZHFwejM0ZXF5MGczd2o1aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/udiIFmPkJQzkI/giphy.gif" alt="Excited GIF">
+                    <p style="font-size: 20px;">Best decision ever! I love you! 💕</p>
+                `;
+            }
+        }
+
+        function goHome() {
+            location.reload(); // Reloads the page to bring user back to the homepage
+        }
+    </script>
+
+</body>
+</html>
